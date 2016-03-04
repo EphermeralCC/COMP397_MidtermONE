@@ -1,3 +1,7 @@
+//The Source file name: play.ts 
+//Author’s name: Christine Cho
+//Program description: Manages the dice and buttons
+
 // PLAY SCENE
 module scenes {
     export class Play extends objects.Scene {
@@ -30,25 +34,26 @@ module scenes {
             
             this._resetAll();
             
-            // add rollnButton to the scene
-            this._rollButton = new objects.Button("rollButton", 420, 400);
+            // add rollButton to the scene
+            this._rollButton = new objects.Button("rollButton", 350, 380);
             this.addChild(this._rollButton);
             this._rollButton.on("click", this._spinButtonClick, this); 
             
-            //Add _jackpotText to the scene
+            //Add _firstDice label to the scene
             this._firstDice = new objects.Label(
                 this._firstDiceNumber.toString(),
                 "bold 18px Consolas",
                 "#8A80A3",
-                250, 332);
+                260, 200);
             this._firstDice.textAlign = "right";
             this.addChild(this._firstDice);
             
+            //Add _secondDice label to the scene
             this._secondDice = new objects.Label(
                 this._secondDiceNumber.toString(),
                 "bold 18px Consolas",
                 "#8A80A3",
-                350, 332);
+                380, 200);
             this._secondDice.textAlign = "right";
             this.addChild(this._secondDice);
 
@@ -68,6 +73,7 @@ module scenes {
 
         }
         
+        //Resets Dice Number to Zero
         private _resetAll(){
             this._firstDiceNumber = 0;
             this._secondDiceNumber = 0;
@@ -79,6 +85,7 @@ module scenes {
             return (value >= lowerBounds && value <= upperBounds) ? value : -1;
         }
 
+        //Manages the Dice Labels and Percentage of Dice appearing
         private _rollDice(): string[] {
             var betLine = [" ", " "];
             var outCome = [0, 1];
@@ -86,9 +93,8 @@ module scenes {
             for (var spin = 0; spin < 2; spin++) {
                 outCome[spin] = Math.floor((Math.random() * 12) + 1);
                 switch (outCome[spin]) {
-                    case this._checkRange(outCome[spin], 1, 2):  // 41.5% probability
+                    case this._checkRange(outCome[spin], 1, 2): 
                         betLine[spin] = "diceONE";
-                        this._diceOne++;
                         if(betLine[0] == "diceONE"){
                             this._firstDice.text = "1";
                         }
@@ -96,45 +102,40 @@ module scenes {
                             this._secondDice.text = "1";
                         }
                         break;
-                    case this._checkRange(outCome[spin], 2, 4): // 15.4% probability
+                    case this._checkRange(outCome[spin], 2, 4):
                         betLine[spin] = "diceTWO";
-                        this._diceTwo++;
                         if(betLine[0] == "diceTWO"){
                             this._firstDice.text = "2";
                         } else{
                             this._secondDice.text = "2";
                         }
                         break;
-                    case this._checkRange(outCome[spin], 5, 6): // 13.8% probability
+                    case this._checkRange(outCome[spin], 5, 6): 
                         betLine[spin] = "diceTHREE";
-                        this._diceThree++;
                         if(betLine[0] == "diceTHREE"){
                             this._firstDice.text = "3";
                         } else{
                             this._secondDice.text = "3";
                         }
                         break;
-                    case this._checkRange(outCome[spin], 7, 8): // 12.3% probability
+                    case this._checkRange(outCome[spin], 7, 8):
                         betLine[spin] = "diceFOUR";
-                        this._diceFour++;
                         if(betLine[0] == "diceFOUR"){
                             this._firstDice.text = "4";
                         } else{
                             this._secondDice.text = "4";
                         }
                         break;
-                    case this._checkRange(outCome[spin], 9, 10): //  7.7% probability
+                    case this._checkRange(outCome[spin], 9, 10):
                         betLine[spin] = "diceFIVE";
-                        this._diceFive++;
                         if(betLine[0] == "diceFIVE"){
                             this._firstDice.text = "5";
                         } else{
                             this._secondDice.text = "5";
                         }
                         break;
-                    case this._checkRange(outCome[spin], 11, 12): //  4.6% probability
+                    case this._checkRange(outCome[spin], 11, 12): 
                         betLine[spin] = "diceSIX";
-                        this._diceSix++;
                         if(betLine[0] == "diceSIX"){
                             this._firstDice.text = "6";
                         } else{
@@ -151,8 +152,8 @@ module scenes {
             this._rolls = new Array<createjs.Bitmap>();
             for (var roll: number = 0; roll < 2; roll++) {
                 this._rolls[roll] = new createjs.Bitmap(assets.getResult("diceONE"));
-                this._rolls[roll].x = 190 + (roll * 100);
-                this._rolls[roll].y = 232;
+                this._rolls[roll].x = 200 + (roll * 120);
+                this._rolls[roll].y = 90;
                 this.addChild(this._rolls[roll]);
             }
 
@@ -162,6 +163,7 @@ module scenes {
         
         //EVENT HANDLERS ++++++++++++++++++++
         
+        //Randomizes Dice images when Roll Button is Clicked
          private _spinButtonClick(event: createjs.MouseEvent): void {
                 var diceBitmap: string[] = this._rollDice();
 

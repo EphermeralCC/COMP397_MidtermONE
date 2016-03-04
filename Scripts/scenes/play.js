@@ -1,3 +1,6 @@
+//The Source file name: play.ts 
+//Author’s name: Christine Cho
+//Program description: Manages the dice and buttons
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -24,15 +27,16 @@ var scenes;
         // Start Method
         Play.prototype.start = function () {
             this._resetAll();
-            // add rollnButton to the scene
-            this._rollButton = new objects.Button("rollButton", 420, 400);
+            // add rollButton to the scene
+            this._rollButton = new objects.Button("rollButton", 350, 380);
             this.addChild(this._rollButton);
             this._rollButton.on("click", this._spinButtonClick, this);
-            //Add _jackpotText to the scene
-            this._firstDice = new objects.Label(this._firstDiceNumber.toString(), "bold 18px Consolas", "#8A80A3", 250, 332);
+            //Add _firstDice label to the scene
+            this._firstDice = new objects.Label(this._firstDiceNumber.toString(), "bold 18px Consolas", "#8A80A3", 260, 200);
             this._firstDice.textAlign = "right";
             this.addChild(this._firstDice);
-            this._secondDice = new objects.Label(this._secondDiceNumber.toString(), "bold 18px Consolas", "#8A80A3", 350, 332);
+            //Add _secondDice label to the scene
+            this._secondDice = new objects.Label(this._secondDiceNumber.toString(), "bold 18px Consolas", "#8A80A3", 380, 200);
             this._secondDice.textAlign = "right";
             this.addChild(this._secondDice);
             //Initialize the reels array of Bitmaps
@@ -43,6 +47,7 @@ var scenes;
         // PLAY Scene updates here
         Play.prototype.update = function () {
         };
+        //Resets Dice Number to Zero
         Play.prototype._resetAll = function () {
             this._firstDiceNumber = 0;
             this._secondDiceNumber = 0;
@@ -52,6 +57,7 @@ var scenes;
         Play.prototype._checkRange = function (value, lowerBounds, upperBounds) {
             return (value >= lowerBounds && value <= upperBounds) ? value : -1;
         };
+        //Manages the Dice Labels and Percentage of Dice appearing
         Play.prototype._rollDice = function () {
             var betLine = [" ", " "];
             var outCome = [0, 1];
@@ -60,7 +66,6 @@ var scenes;
                 switch (outCome[spin]) {
                     case this._checkRange(outCome[spin], 1, 2):
                         betLine[spin] = "diceONE";
-                        this._diceOne++;
                         if (betLine[0] == "diceONE") {
                             this._firstDice.text = "1";
                         }
@@ -70,7 +75,6 @@ var scenes;
                         break;
                     case this._checkRange(outCome[spin], 2, 4):
                         betLine[spin] = "diceTWO";
-                        this._diceTwo++;
                         if (betLine[0] == "diceTWO") {
                             this._firstDice.text = "2";
                         }
@@ -80,7 +84,6 @@ var scenes;
                         break;
                     case this._checkRange(outCome[spin], 5, 6):
                         betLine[spin] = "diceTHREE";
-                        this._diceThree++;
                         if (betLine[0] == "diceTHREE") {
                             this._firstDice.text = "3";
                         }
@@ -90,7 +93,6 @@ var scenes;
                         break;
                     case this._checkRange(outCome[spin], 7, 8):
                         betLine[spin] = "diceFOUR";
-                        this._diceFour++;
                         if (betLine[0] == "diceFOUR") {
                             this._firstDice.text = "4";
                         }
@@ -100,7 +102,6 @@ var scenes;
                         break;
                     case this._checkRange(outCome[spin], 9, 10):
                         betLine[spin] = "diceFIVE";
-                        this._diceFive++;
                         if (betLine[0] == "diceFIVE") {
                             this._firstDice.text = "5";
                         }
@@ -110,7 +111,6 @@ var scenes;
                         break;
                     case this._checkRange(outCome[spin], 11, 12):
                         betLine[spin] = "diceSIX";
-                        this._diceSix++;
                         if (betLine[0] == "diceSIX") {
                             this._firstDice.text = "6";
                         }
@@ -126,12 +126,13 @@ var scenes;
             this._rolls = new Array();
             for (var roll = 0; roll < 2; roll++) {
                 this._rolls[roll] = new createjs.Bitmap(assets.getResult("diceONE"));
-                this._rolls[roll].x = 190 + (roll * 100);
-                this._rolls[roll].y = 232;
+                this._rolls[roll].x = 200 + (roll * 120);
+                this._rolls[roll].y = 90;
                 this.addChild(this._rolls[roll]);
             }
         };
         //EVENT HANDLERS ++++++++++++++++++++
+        //Randomizes Dice images when Roll Button is Clicked
         Play.prototype._spinButtonClick = function (event) {
             var diceBitmap = this._rollDice();
             for (var roll = 0; roll < 2; roll++) {
