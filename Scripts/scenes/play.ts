@@ -81,7 +81,7 @@ module scenes {
 
         private _rollDice(): string[] {
             var betLine = [" ", " "];
-            var outCome = [0, 0];
+            var outCome = [0, 1];
 
             for (var spin = 0; spin < 2; spin++) {
                 outCome[spin] = Math.floor((Math.random() * 12) + 1);
@@ -89,26 +89,57 @@ module scenes {
                     case this._checkRange(outCome[spin], 1, 2):  // 41.5% probability
                         betLine[spin] = "diceONE";
                         this._diceOne++;
+                        if(betLine[0] == "diceONE"){
+                            this._firstDice.text = "1";
+                        }
+                        else{
+                            this._secondDice.text = "1";
+                        }
                         break;
                     case this._checkRange(outCome[spin], 2, 4): // 15.4% probability
                         betLine[spin] = "diceTWO";
                         this._diceTwo++;
+                        if(betLine[0] == "diceTWO"){
+                            this._firstDice.text = "2";
+                        } else{
+                            this._secondDice.text = "2";
+                        }
                         break;
                     case this._checkRange(outCome[spin], 5, 6): // 13.8% probability
                         betLine[spin] = "diceTHREE";
                         this._diceThree++;
+                        if(betLine[0] == "diceTHREE"){
+                            this._firstDice.text = "3";
+                        } else{
+                            this._secondDice.text = "3";
+                        }
                         break;
                     case this._checkRange(outCome[spin], 7, 8): // 12.3% probability
                         betLine[spin] = "diceFOUR";
                         this._diceFour++;
+                        if(betLine[0] == "diceFOUR"){
+                            this._firstDice.text = "4";
+                        } else{
+                            this._secondDice.text = "4";
+                        }
                         break;
                     case this._checkRange(outCome[spin], 9, 10): //  7.7% probability
                         betLine[spin] = "diceFIVE";
                         this._diceFive++;
+                        if(betLine[0] == "diceFIVE"){
+                            this._firstDice.text = "5";
+                        } else{
+                            this._secondDice.text = "5";
+                        }
                         break;
                     case this._checkRange(outCome[spin], 11, 12): //  4.6% probability
                         betLine[spin] = "diceSIX";
                         this._diceSix++;
+                        if(betLine[0] == "diceSIX"){
+                            this._firstDice.text = "6";
+                        } else{
+                            this._secondDice.text = "6";
+                        }
                         break;
                 }
             }
@@ -127,8 +158,7 @@ module scenes {
 
         }
         
-        
-        
+               
         
         //EVENT HANDLERS ++++++++++++++++++++
         
