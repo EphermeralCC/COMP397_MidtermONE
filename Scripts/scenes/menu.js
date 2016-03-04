@@ -37,7 +37,7 @@ var scenes;
             changeScene();
         };
         return Menu;
-    }(objects.Scene));
+    })(objects.Scene);
     scenes.Menu = Menu;
 })(scenes || (scenes = {}));
 //# sourceMappingURL=menu.js.map

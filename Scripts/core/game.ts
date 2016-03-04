@@ -18,6 +18,13 @@ var assetData:objects.Asset[] = [
     // Add your Assets here
     {id: "StartButton", src:"../../Assets/images/StartButton.png"},
     {id: "StartOverButton", src:"../../Assets/images/StartOverButton.png"}
+    {id: "diceONE", src:"../../Assets/images/diceONE.png"},
+    {id: "diceTWO", src:"../../Assets/images/diceTWO.png"},
+    {id: "diceTHREE", src:"../../Assets/images/diceTHREE.png"},
+    {id: "diceFOUR", src:"../../Assets/images/diceFOUR.png"},
+    {id: "diceFIVE", src:"../../Assets/images/diceFIVE.png"},
+    {id: "diceSIX", src:"../../Assets/images/diceSIX.png"},
+    {id: "rollButton", src:"../../Assets/images/rollButton.png"}
 
 ];
 
